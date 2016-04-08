@@ -60,7 +60,7 @@ a#key:hover{
 body{
 	background-color:#d6d6c2;
 }
-textarea{
+textarea#comment{
 	margin-top: 20px;
 	width: 75%;
 }
@@ -139,15 +139,34 @@ p{
 	font-family: "Walkway";
 	font-weight: bold;
 	font-size: 1.8em;
-	/*font-family: 'florencesans';*/
+	display: inline-block;
 }
-
 img{
 	display: inline-block;
 	width: 100%;
 	height: auto;
 }
+textarea{
+	display: inline-block;
+	width: auto;
+	font-family: "Walkway";
+}
+textarea#category{
+	font-family: "Coolvetica";
+}
+textarea#content{
+	font-size: 2em;
+	width: 100%;
+}
+textarea#keyword{
+	width: 100%;
+}
+p#image{
+	font-size:1em;
+	display: inline-block;
+}
+input{
+	display: inline-block;
+	font-family: "Walkway";
+}
 
-/**{
-	border : solid black 4px;
-}*/	
