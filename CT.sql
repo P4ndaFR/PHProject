@@ -6,7 +6,7 @@ drop table if exists category;
 drop table if exists keyword;
 drop table if exists comment;
 drop table if exists article;
-drop table if exists author;
+drop table if exists user;
 CREATE TABLE article
 (
 	title		VARCHAR(40) 	PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE media
 	media_path 	VARCHAR(100)	PRIMARY KEY,
 	title		VARCHAR(40)
 )engine=innodb;
-CREATE TABLE author
+CREATE TABLE user
 (
 	pseudo 		VARCHAR(25) 	PRIMARY KEY
 )engine=innodb;
@@ -50,7 +50,7 @@ CREATE TABLE comment
 (
 	name		VARCHAR(40)		PRIMARY KEY,
 	content		VARCHAR(100),
-	author		VARCHAR(40)
+	pseudo		VARCHAR(25)
 )engine=innodb;
 CREATE TABLE article_comment
 (
@@ -58,8 +58,9 @@ CREATE TABLE article_comment
 	name		VARCHAR(100),
 	PRIMARY KEY(title,name)
 )engine=innodb;
-ALTER TABLE article ADD FOREIGN KEY (pseudo) REFERENCES author(pseudo);
+ALTER TABLE article ADD FOREIGN KEY (pseudo) REFERENCES user(pseudo);
 ALTER TABLE media ADD FOREIGN KEY (title) REFERENCES article(title);
+ALTER TABLE comment ADD FOREIGN KEY (pseudo) REFERENCES user(pseudo);
 ALTER TABLE article_category
 	ADD FOREIGN KEY (title) REFERENCES article(title),
 	ADD FOREIGN KEY (name) REFERENCES category(name);

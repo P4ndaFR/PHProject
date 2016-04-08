@@ -1,38 +1,32 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Source</title>
+    <title>Twittard</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <table>
+    <header>
+        <h1>TWITTARD</h1>
+        <button>connect</button>
+        <button>sign in</button>
+    </header>
+    <section>
+        <article>
+            <h2>Title@author</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+            <table>
+                <tr>
+                    <td>#keyword1</td>
+                    <td>#keyword3</td>
+                    <td>#keyword4</td>
+                    <td>#keyword5</td>
+                </tr>
+            </table> 
+            <img src="media/finda.jpg" alt="image" />       
+        </article>
         <?php
-            $db = mysqli_connect("localhost","root","2Zz6500145","cinema") or die("no CNX");
-            //$query = mysqli_query($db,"use cinema");
-            $query2 = mysqli_query($db,'SELECT id,LOWER(titre) as titre,genre,pays,date,nb_copies FROM films ORDER BY titre');
-            $i=0;
-            echo'<table>';
-            while ($result = mysqli_fetch_array($query2))
-            {
-                echo '<tr>';
-                echo '<td>'.$result['id'].'</td>';
-                echo '<td>'.$result['titre'].'</td>';
-                echo '<td>'.$result['genre'].'</td>';
-                echo '<td>'.$result['pays'].'</td>';
-                echo '<td>'.$result['date'].'</td>';
-                echo '<td>'.$result['nb_copies'].'</td>';
-                //echo '<td>'.$result['art-essai'].'</td>';
-                /*for ($i=0; $i < count($result); $i++) 
-                { 
-                    echo '<td>'.$result[''];
-                }*/
-                $i++;
 
-            }
-            echo '</table>';
-            echo 'Nb of Movies = '.$i;
-            //mysqli_free_result($query2);
-            mysqli_close($db);
         ?>
-    </table>
+    </section>
 </body>
 </html>
