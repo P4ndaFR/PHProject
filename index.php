@@ -23,6 +23,8 @@
                 </tr>
             </table> 
             <img src="media/finda.jpg" alt="image" />
+            <button id="like">Like</button>
+            <button id ="dislike">Dislike</button>
             <form method="POST" action="button">
                 <textarea name="comentaire" >Enter a comment (100 characters max)</textarea>
                 <button>Send</button>

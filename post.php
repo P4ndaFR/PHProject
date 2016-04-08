@@ -7,9 +7,31 @@
 <body>
     <header>
         <h1>TWITTARD</h1>
-        <a href="">Post an article</a>
+        <a href="post.php"><button>Add an Article</button></a>
     </header>
     <section>
+        <article>
+            <form>
+            <h2>Title@author</h2>
+            <h3>Category Category Category</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
+            <table>
+                <tr>
+                    <td><a id="key" href="">#keyword1</a></td>
+                    <td><a id="key" href="">#keyword2</a></td>
+                    <td><a id="key" href="">#keyword3</a></td>
+                    <td><a id="key" href="">#keyword4</a></td>
+                </tr>
+            </table> 
+            <img src="media/finda.jpg" alt="image" />
+            <button id="like">Like</button>
+            <button id ="dislike">Dislike</button>
+            <form method="POST" action="button">
+                <textarea name="comentaire" >Enter a comment (100 characters max)</textarea>
+                <button>Send</button>
+            </form> 
+            </form>     
+        </article>
         <?php
 
         ?>
