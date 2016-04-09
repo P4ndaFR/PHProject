@@ -34,20 +34,16 @@ h1{
 }
 
 h2{
-	text-align: center;
 	font-family: "Walkway";
 	font-size: 2.5em;
-	display: inline-block;
 }
 
-h3
-{
+h3{
 	position:relative;
 	width: auto;
-	left: 45%;
-	font-family: "Coolvetica";
-	font-size: 1.5em;
+	font-family: "Coolvetica";;
 	display: inline-block;
+	margin: 10px;
 }
 a#key,a#key:focus, a#key:active {
   text-decoration: none;
@@ -141,18 +137,26 @@ p{
 	font-size: 1.8em;
 	display: inline-block;
 }
+p#instructions{
+	font-size: 1em;	
+}
 img{
 	display: inline-block;
 	width: 100%;
 	height: auto;
 }
 textarea{
+	vertical-align: text-top;
 	display: inline-block;
 	width: auto;
 	font-family: "Walkway";
+	margin-bottom: 10px;
 }
 textarea#category{
 	font-family: "Coolvetica";
+	display: block;
+	margin-bottom: 15px;
+	width: 100%;
 }
 textarea#content{
 	font-size: 2em;
@@ -160,6 +164,9 @@ textarea#content{
 }
 textarea#keyword{
 	width: 100%;
+}
+textarea#author{
+	width: 15%;
 }
 p#image{
 	font-size:1em;

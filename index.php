@@ -12,7 +12,12 @@
     <section>
         <article>
             <h2>Title@author</h2>
-            <h3>Category</h3>
+            <h3>Category1</h3>
+            <h3>Category2</h3>
+            <h3>Category3</h3>
+            <h3>Category4</h3>
+            <h3>Category5</h3>
+            <h3>Category6</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.</p>
             <table>
                 <tr>
