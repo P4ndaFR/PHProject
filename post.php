@@ -12,7 +12,8 @@
     <section>
         <article>
             <form>
-            <textarea id="title">Entrer the Title</textarea><p>@</p>
+            <textarea id="title" placeholder="Entrer the Title"></textarea>
+            <p id="instructions">@</p>
             <p id="instructions">and choose</p>
             <input list="authors" name="authors">
             <datalist id="authors">
@@ -22,11 +23,11 @@
                 <option value="author4">
             </datalist>
             <p id="instructions">or create</p>
-            <textarea id="author">an author</textarea>
+            <textarea id="author" placeholder="an author"></textarea>
             <!-- <textarea id="author">the Author</textarea> -->
-            <textarea id="category"> The Categorie(s)</textarea>
-            <textarea id="content"> The Content(140 character max)</textarea>
-            <textarea id="keyword">The Keyword(s)</textarea>
+            <textarea id="category" placeholder="The Categorie(s)"></textarea>
+            <textarea id="content" placeholder="The Content(140 character max)"></textarea>
+            <textarea id="keyword" placeholder="The Keyword(s)"></textarea>
             <p id="image">Enter a picture or a Video:</p>
             <input type="file" name="image">
             <button id="post">Post</button> 

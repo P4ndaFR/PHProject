@@ -50,23 +50,17 @@ CREATE TABLE comment
 (
 	name		VARCHAR(40)		PRIMARY KEY,
 	content		VARCHAR(100),
-	pseudo		VARCHAR(25)
-)engine=innodb;
-CREATE TABLE article_comment
-(
-	title		VARCHAR(40),
-	name		VARCHAR(100),
-	PRIMARY KEY(title,name)
+	pseudo		VARCHAR(25),
+	title		VARCHAR(40)
 )engine=innodb;
 ALTER TABLE article ADD FOREIGN KEY (pseudo) REFERENCES user(pseudo);
 ALTER TABLE media ADD FOREIGN KEY (title) REFERENCES article(title);
-ALTER TABLE comment ADD FOREIGN KEY (pseudo) REFERENCES user(pseudo);
 ALTER TABLE article_category
 	ADD FOREIGN KEY (title) REFERENCES article(title),
 	ADD FOREIGN KEY (name) REFERENCES category(name);
 ALTER TABLE article_keyword
 	ADD FOREIGN KEY (title) REFERENCES article(title),
 	ADD FOREIGN KEY (word) REFERENCES keyword(word);
-ALTER TABLE article_comment
-	ADD FOREIGN KEY (title) REFERENCES article(title),
-	ADD FOREIGN KEY (name) REFERENCES comment(name);
+ALTER TABLE comment
+	ADD FOREIGN KEY (pseudo) REFERENCES user(pseudo),
+	ADD FOREIGN KEY (title) REFERENCES article(title);

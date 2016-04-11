@@ -57,8 +57,9 @@ body{
 	background-color:#d6d6c2;
 }
 textarea#comment{
+	vertical-align: text-top;
 	margin-top: 20px;
-	width: 75%;
+	width: 100%;
 }
 button{
 	position: relative;
@@ -102,9 +103,12 @@ button#dislike:hover{
 	border: none;
 }
 button:hover{
-	background-color:#d6d6c2;
+	background-color:#666666;
 	color: white;
 	border: none;
+}
+button#send{
+	width:34%;
 }
 
 form button{
@@ -135,7 +139,6 @@ p{
 	font-family: "Walkway";
 	font-weight: bold;
 	font-size: 1.8em;
-	display: inline-block;
 }
 p#instructions{
 	font-size: 1em;	
@@ -172,8 +175,22 @@ p#image{
 	font-size:1em;
 	display: inline-block;
 }
+p#instructions{
+	display: inline-block;
+}
+h2#comment{
+	font-size: 1.3em;
+}
+p#comment{
+	font-size: 1em;
+}
+div{
+	border: solid #c2c2a3 1px;
+	padding: 10px;
+}
 input{
 	display: inline-block;
 	font-family: "Walkway";
 }
+
 
