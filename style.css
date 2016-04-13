@@ -75,6 +75,54 @@ button{
     text-decoration: none;
     font-size: 16px;
 }
+input[type='button']
+{
+	position: relative;
+	display: inline-block;
+	margin:5px;
+	background-color: white;
+    border: solid black 1px;
+    border-radius: 5px;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+input[type = button]:hover
+{
+	background-color:#666666;
+	color: white;
+	border: none;
+}
+input[type='file']
+{
+	display: block;
+	position: relative;
+	margin:10px;
+	background-color: white;
+    border: solid black 1px;
+    border-radius: 5px;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+input[type='file']:hover
+{
+	background-color:#666666;
+	color: white;
+	border: none;
+}
+input#title{
+	width: 15%;
+}
+input[type='checkbox']
+{
+	margin: 20px;
+	font-family:'Coolvetica';
+}
 button#like
 {
 	border: solid green 1px;
@@ -108,9 +156,11 @@ button:hover{
 	border: none;
 }
 button#send{
-	width:34%;
+	width:24%;
 }
-
+button#post{
+	width: 100%;
+}
 form button{
 	border: solid black 1px;
 	position: relative;
@@ -140,8 +190,11 @@ p{
 	font-weight: bold;
 	font-size: 1.8em;
 }
-p#instructions{
-	font-size: 1em;	
+legend{
+	display: inline-block;
+	width: auto;
+	font-family: "Walkway";
+	margin-bottom: 10px;
 }
 img{
 	display: inline-block;
@@ -155,12 +208,6 @@ textarea{
 	font-family: "Walkway";
 	margin-bottom: 10px;
 }
-textarea#category{
-	font-family: "Coolvetica";
-	display: block;
-	margin-bottom: 15px;
-	width: 100%;
-}
 textarea#content{
 	font-size: 2em;
 	width: 100%;
@@ -168,15 +215,17 @@ textarea#content{
 textarea#keyword{
 	width: 100%;
 }
-textarea#author{
-	width: 15%;
+input#author{
+	width: 10%;
+	margin: 20px;
 }
 p#image{
 	font-size:1em;
 	display: inline-block;
 }
-p#instructions{
+p#form{
 	display: inline-block;
+	font-size: 1em;
 }
 h2#comment{
 	font-size: 1.3em;
@@ -184,6 +233,10 @@ h2#comment{
 p#comment{
 	font-size: 1em;
 }
+input{
+	margin-left: 20px;
+}
+p#keyword
 div{
 	border: solid #c2c2a3 1px;
 	padding: 10px;
