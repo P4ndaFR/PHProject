@@ -52,17 +52,20 @@
                     echo'
                     <form method="POST" action="button">
                         <textarea name="comentaire" id="comment" placeholder="Enter a comment (100 characters max)"></textarea>
-                        <br/><p id="instructions">Choose</p>
+                        <br/><p id="form">Choose</p>
                         <input list="authors" name="authors">
                         <datalist id="authors">
-                            <option value="author1">
-                            <option value="author2">
-                            <option value="author3">
-                            <option value="author4">
+                        ';
+                                $q5 = mysqli_query($db,"select pseudo from user;");
+                                while ( $raw5=mysqli_fetch_array($q5) )
+                                {
+                                    echo '<option value="'.$raw5['pseudo'].'">';
+                                }
+                        echo '
                         </datalist>
-                        <p id="instructions">or create</p>
+                        <p id="form">or create</p>
                         <textarea id="author" placeholder="an author"></textarea>
-                        <button id="send">Comment</button>
+                        <button id="send" type="submit">Comment</button>
                     </form>      
                 </article> ';
             }
@@ -89,7 +92,7 @@
             <button id ="dislike">Dislike</button>
             <form method="POST" action="button">
                 <textarea name="comentaire" id="comment" >Enter a comment (100 characters max)</textarea>
-                <br/><p id="instructions">Choose</p>
+                <br/><p id="form">Choose</p>
                 <input list="authors" name="authors">
                 <datalist id="authors">
                     <option value="author1">
@@ -97,7 +100,7 @@
                     <option value="author3">
                     <option value="author4">
                 </datalist>
-                <p id="instructions">or create</p>
+                <p id="form">or create</p>
                 <textarea id="author">an author</textarea>
                 <button id="send">Comment</button>
             </form>      
