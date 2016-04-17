@@ -11,6 +11,16 @@
         <a href="post.php"><button>Add an Article</button></a>
     </header>
     <section>
+        <article>
+            <form>
+                <legend>Triez par :</legend>
+                <button>Likes</button>
+                <button>Dislikes</button>
+                <button>Ordre chronologique</button>
+                <button>Ordre anti-chronologique</button>
+                <button>Catégories</button>
+            </form>
+        </article>
         <?php
             $db = mysqli_connect("localhost","root","2Zz6500145","PHProject") or die("no connexion");
             mysqli_query($db,"SET NAMES UTF8");
@@ -70,6 +80,7 @@
                 </article> ';
             }
         ?>
+        <!--
         <article>
             <h2>Title@author</h2>
             <h3>Category1</h3>
@@ -105,9 +116,7 @@
                 <button id="send">Comment</button>
             </form>      
         </article>
-        <?php
-
-        ?>
+       -->
     </section>
 </body>
 </html>
