@@ -1,4 +1,4 @@
-function addInput()
+function addInput(use)
 {
 	//alert('dans la fonction');
 	var form = document.getElementById('form');
@@ -8,7 +8,9 @@ function addInput()
 	var input = document.createElement('input');
 	
 	input.type='file';
-	input.name='media';
-	//alert('dans la fonction');
+	input.name='media'+use;
 	form.insertBefore(input, form.childNodes[children.length-5]);
+    use++;
+    //alert(use);
+    return use;
 }

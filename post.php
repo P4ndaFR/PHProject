@@ -60,11 +60,10 @@
             <textarea id="keyword" name="new_keyword" placeholder="The Keyword(s)"></textarea>
             <legend>Enter a picture or a Video:</legend>
             <input type="file" name="media">
-            <input  onclick="addInput()" type="button" value="Add another Picture/video" id='add' >
+            <script>var use=0;</script>
+            <input  onclick="use=addInput(use)" type="button" value="Add another Picture/video" id='add' >
             <button id="post" type="submit">Post</button> 
             </form>     
-        </article>
-    </section>
     <?php
             if( $_POST['new_author']!="" && $_POST['existant_author']!="" )
             {
@@ -126,6 +125,19 @@
                 $q=mysqli_query($db,'insert into article_keyword values("'.$_POST['title'].'","'.$tok.'");');
                 $tok=strtok(" ");
             }
+            $uploaddir = '/var/www/tp/swagpanda/PHProject/media/';
+            $use=0;
+            while($_FILES['media'.$use]['name'])
+            {
+                $uploadfile = $uploaddir.basename($_FILES['media'.$use]['name']);
+                if(move_uploaded_file($_FILES['media'.$use]['tmp_name'],$uploadfile))
+                {
+                    mysqli_query($db,'insert into media values("'.'media/'.$_FILES['media'.$use]['name'].'","'.$_POST['title'].'");');
+                    $use++;
+                }
+            }
     ?>
+              </article>
+    </section>
 </body>
 </html>
