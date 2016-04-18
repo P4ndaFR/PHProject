@@ -22,7 +22,7 @@
             </form>
         </article>
         <?php
-            $db = mysqli_connect("localhost","root","2Zz6500145","PHProject") or die("no connexion");
+            $db = mysqli_connect("localhost","ark","azerty123","PHProject") or die("no connexion");
             mysqli_query($db,"SET NAMES UTF8");
             $q1 = mysqli_query($db,'SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo,media_path FROM article,media WHERE article.title=media.title;');
             while ($raw = mysqli_fetch_array($q1))
@@ -80,7 +80,6 @@
                 </article> ';
             }
         ?>
-        <!--
         <article>
             <h2>Title@author</h2>
             <h3>Category1</h3>
@@ -116,7 +115,6 @@
                 <button id="send">Comment</button>
             </form>      
         </article>
-       -->
     </section>
 </body>
 </html>

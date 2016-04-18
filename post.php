@@ -12,7 +12,7 @@
     </header>
     <section>
         <?php
-            $db = mysqli_connect("localhost","root","2Zz6500145","PHProject") or die("no connexion");
+            $db = mysqli_connect("localhost","ark","azerty123","PHProject") or die("no connexion");
         ?>
         <article>
             <form method="post" id="form" enctype="multipart/form-data">
