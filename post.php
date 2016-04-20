@@ -59,10 +59,9 @@
             <legend>or add a new one</legend>
             <textarea id="keyword" name="new_keyword" placeholder="The Keyword(s)"></textarea>
             <legend>Enter a picture or a Video:</legend>
-            <input type="file" name="media">
-            <!--
-            <input  onclick="addInput()" type="button" value="Add another Picture/video" id='add' >
-            -->
+            <input type="file" name="media0">
+            <script>use=1;</script>
+            <input  onclick="use=addInput(use)" type="button" value="Add another Picture/video" id='add' >
             <button id="post" type="submit">Post</button> 
             </form>     
     <?php
@@ -127,12 +126,17 @@
                 $tok=strtok(" ");
             }
             $uploaddir = '/var/www/tp/swagpanda/PHProject/media/';
-            $uploadfile = $uploaddir.basename($_FILES['media']['name']);
-            if(move_uploaded_file($_FILES['media']['tmp_name'],$uploadfile))
+            $use=0;
+            while($_FILES['media'.$use]['name'])
             {
-                mysqli_query($db,'insert into media values("'.'media/'.$_FILES['media']['name'].'","'.$_POST['title'].'");');
-                $use++;
-            }   
+                $uploadfile = $uploaddir.basename($_FILES['media'.$use]['name']);
+                if(move_uploaded_file($_FILES['media'.$use]['tmp_name'],$uploadfile))
+                {
+                    mysqli_query($db,'insert into media values("'.'media/'.$_FILES['media'.$use]['name'].'","picture");');
+                    mysqli_query($db,'insert into article_media values("'.'media/'.$_FILES['media'.$use]['name'].'","'.$_POST['title'].'");');
+                    $use++;
+                }
+            }
     ?>
               </article>
     </section>

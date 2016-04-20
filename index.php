@@ -24,7 +24,7 @@
         <?php
             $db = mysqli_connect("localhost","ark","azerty123","PHProject") or die("no connexion");
             mysqli_query($db,"SET NAMES UTF8");
-            $q1 = mysqli_query($db,'SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo,media_path FROM article,media WHERE article.title=media.title;');
+            $q1 = mysqli_query($db,'SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article;');
             while ($raw = mysqli_fetch_array($q1))
             {
                 echo '
@@ -47,7 +47,20 @@
                     }
                     echo '</tr>
                     </table>
-                    <img src="'.$raw['media_path'].'" alt="image" />
+                    ';
+                    $q= mysqli_query($db,'SELECT article_media.media_path AS amediapath,type FROM article_media,media WHERE article_media.title=\''.$raw['atitle'].'\' AND media.media_path=article_media.media_path;');
+                    while($r = mysqli_fetch_array($q))
+                    {
+                        if($r['type'] == "picture")
+                        {
+                            echo '<img src="'.$r['amediapath'].'" alt="image" />';
+                        }
+                        if($r['type'] == "video")
+                        {
+                            
+                        }
+                    }
+                    echo '
                     <button id="like">Like</button>
                     <button id ="dislike">Dislike</button>';
                     $q4 = mysqli_query($db,'SELECT name,content,pseudo FROM comment WHERE comment.title=\''.$raw['atitle'].'\';');
