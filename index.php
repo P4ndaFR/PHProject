@@ -11,20 +11,46 @@
         <a href="post.php"><button>Add an Article</button></a>
     </header>
     <section>
+        <?php
+            //if();
+        ?>
         <article>
-            <form>
+            <form method="post">
                 <legend>Triez par :</legend>
-                <button>Likes</button>
-                <button>Dislikes</button>
-                <button>Ordre chronologique</button>
-                <button>Ordre anti-chronologique</button>
-                <button>Catégories</button>
+                <input type="submit" name="likes" value="Likes">
+                <input type="submit" name="dislikes" value="Dislikes">
+                <input type="submit" name="chrono" value="Ordre chronologique">
+                <input type="submit" name="nochrono" value="Ordre anti-chronologique">
+                <input type="submit" name="category" value="Catégories">
             </form>
+            <?php
+                $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article;';
+                if($_POST['likes'])
+                {
+                    $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY likes DESC;';
+                }
+                if($_POST['dislikes'])
+                {
+                    $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY dislikes DESC;';
+                }
+                if($_POST['chrono'])
+                {
+                    $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY postdate;';
+                }
+                if($_POST['nochrono'])
+                {
+                    $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY postdate DESC;';
+                }
+                if($_POST['category'])
+                {
+                    $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo,name FROM article,article_category WHERE article.title=article_category.title GROUP BY name,article_title;';
+                }
+            ?>
         </article>
         <?php
             $db = mysqli_connect("localhost","ark","azerty123","PHProject") or die("no connexion");
             mysqli_query($db,"SET NAMES UTF8");
-            $q1 = mysqli_query($db,'SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article;');
+            $q1 = mysqli_query($db,$qcontent);
             while ($raw = mysqli_fetch_array($q1))
             {
                 echo '
@@ -56,13 +82,28 @@
                             echo '<img src="'.$r['amediapath'].'" alt="image" />';
                         }
                         if($r['type'] == "video")
-                        {
-                            
+                        {   
+                            strtok($r['amediapath'],".");
+                            $tok=strtok(".");
+                            echo '
+                            <video controls>
+                            <source src="'.$r['amediapath'].'" type="video/'.$tok.'" >
+                            </video>';
                         }
                     }
                     echo '
-                    <button id="like">Like</button>
-                    <button id ="dislike">Dislike</button>';
+                    <form method="post">
+                    <input id="like" type="submit" name="like'.$raw['atitle'].'" value="Like">
+                    <input id="dislike" type="submit" name="dislike'.$raw['atitle'].'" value="Dislike">
+                    </form>';
+                    if($_POST['like'.$raw['atitle']])
+                    {
+                        mysqli_query($db,'UPDATE article SET likes=likes+1 WHERE article.title = \''.$raw['atitle'].'\';');
+                    }
+                    if($_POST['dislike'.$raw['atitle']])
+                    {
+                        mysqli_query($db,'UPDATE article SET dislikes=dislikes+1 WHERE article.title = \''.$raw['atitle'].'\';');
+                    }
                     $q4 = mysqli_query($db,'SELECT name,content,pseudo FROM comment WHERE comment.title=\''.$raw['atitle'].'\';');
                     while ($raw4 = mysqli_fetch_array($q4)) 
                     {

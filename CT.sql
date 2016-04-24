@@ -14,7 +14,8 @@ CREATE TABLE article
 	content 	VARCHAR(140),
 	likes		INTEGER,
 	dislikes	INTEGER,
-	pseudo 		VARCHAR(40)
+	pseudo 		VARCHAR(40),
+    postdate    DATETIME
 )engine=innodb;
 CREATE TABLE media
 (

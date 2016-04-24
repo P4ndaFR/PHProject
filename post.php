@@ -37,7 +37,6 @@
                 while ( $raw2=mysqli_fetch_array($q2) )
                 {
                     echo '
-                    <input type="hidden" name="MAX_FILE_SIZE" value="15 000 000" />
                     <input id="category" name="category'.$nbcat.'" type="checkbox">'.$raw2['name'].'</input>';
                     $tabcat[$nbcat]=$raw2['name'];
                     $nbcat++;
@@ -86,13 +85,13 @@
             if($_POST['new_author'] != "")
             {
                 mysqli_query($db,'insert into user values("'.$_POST['new_author'].'")');
-                mysqli_query($db,'insert into article values("'.$_POST['title'].'","'.$_POST['content'].'",0,0,"'.$_POST['new_author'].'");'); 
+                mysqli_query($db,'insert into article values("'.$_POST['title'].'","'.$_POST['content'].'",0,0,"'.$_POST['new_author'].'",SYSDATE());'); 
                 echo "Nouvel auteur + article ok";
             }
             if($_POST['existant_author'] != "")
             {
-                $q=mysqli_query($db,'insert into article values("'.$_POST['title'].'","'.$_POST['content'].'",0,0,"'.$_POST['existant_author'].'");');
-                echo "Nouvel auteur + article ok";
+                $q=mysqli_query($db,'insert into article values("'.$_POST['title'].'","'.$_POST['content'].'",0,0,"'.$_POST['existant_author'].'",SYSDATE());');
+                echo "Nouvel auteur + article ok<br />";
             }
             for ($i=0; $i < $nbcat; $i++)
             { 
@@ -129,10 +128,26 @@
             $use=0;
             while($_FILES['media'.$use]['name'])
             {
+                strtok($_FILES['media'.$use]['name'],".");
+                $tok=strtok(".");
+                $type="";
+                echo $tok;
+                if($tok == "jpg" || $tok == "png")
+                {
+                    $type="picture"; 
+                }
+                if($tok == "mkv" || $tok=="mp4" || $tok=="webm")
+                {
+                    $type="video";
+                }
+                if($type=="")
+                {
+                    exit("Entrez une image au format jpg/png ou une vidéo au format mkv/mp4/webm");
+                }
                 $uploadfile = $uploaddir.basename($_FILES['media'.$use]['name']);
                 if(move_uploaded_file($_FILES['media'.$use]['tmp_name'],$uploadfile))
                 {
-                    mysqli_query($db,'insert into media values("'.'media/'.$_FILES['media'.$use]['name'].'","picture");');
+                    mysqli_query($db,'insert into media values("'.'media/'.$_FILES['media'.$use]['name'].'","'.$type.'");');
                     mysqli_query($db,'insert into article_media values("'.'media/'.$_FILES['media'.$use]['name'].'","'.$_POST['title'].'");');
                     $use++;
                 }
@@ -142,9 +157,3 @@
     </section>
 </body>
 </html>
-
-function detectKeyword($t, $c='#'){
-    $regEx = "/($c)(/S*)/";
-    preg_matches_all($regEx, $result, $t, PREG_PATTERN_ORDER);
-    return $result[2];
-}

@@ -18,7 +18,8 @@
 header
 {
 	background-color: black;
-	position: absolute;
+	position: fixed;
+    z-index: 1;
 	left:0;
 	top:0;
 	border: solid black 2px;
@@ -64,7 +65,7 @@ textarea#comment{
 button{
 	position: relative;
 	display: inline-block;
-	left:73%;
+	left:80%;
 	margin:5px;
 	background-color: white;
     border: none;
@@ -75,7 +76,7 @@ button{
     text-decoration: none;
     font-size: 16px;
 }
-input[type='button']
+input[type='button'],input[type='submit']
 {
 	position: relative;
 	display: inline-block;
@@ -89,7 +90,7 @@ input[type='button']
     text-decoration: none;
     font-size: 16px;
 }
-input[type = button]:hover
+input[type='button']:hover,input[type='submit']:hover
 {
 	background-color:#666666;
 	color: white;
@@ -123,7 +124,7 @@ input[type='checkbox']
 	margin: 20px;
 	font-family:'Coolvetica';
 }
-button#like
+input#like
 {
 	border: solid green 1px;
 	left:0;
@@ -131,12 +132,12 @@ button#like
 	width: 48%;
 	display: inline-block;
 }
-button#like:hover{
+input#like:hover{
 	background-color:green;
 	color: white;
 	border: none;
 }
-button#dislike
+input#dislike
 {
 	background-color:white;
 	left:0;
@@ -145,7 +146,7 @@ button#dislike
 	width: 48%;
 	display: inline-block;
 }
-button#dislike:hover{
+input#dislike:hover{
 	background-color:red;
 	color: white;
 	border: none;
@@ -196,7 +197,7 @@ legend{
 	font-family: "Walkway";
 	margin-bottom: 10px;
 }
-img{
+img,video{
 	display: inline-block;
 	width: 100%;
 	height: auto;
@@ -243,7 +244,6 @@ div{
 }
 input{
 	display: inline-block;
-	font-family: "Walkway";
 }
 
 
