@@ -142,3 +142,9 @@
     </section>
 </body>
 </html>
+
+function detectKeyword($t, $c='#'){
+    $regEx = "/($c)(/S*)/";
+    preg_matches_all($regEx, $result, $t, PREG_PATTERN_ORDER);
+    return $result[2];
+}
