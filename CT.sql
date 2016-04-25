@@ -57,8 +57,7 @@ CREATE TABLE article_category
 )engine=innodb;
 CREATE TABLE comment
 (
-	name		VARCHAR(40)		PRIMARY KEY,
-	content		VARCHAR(100),
+	content		VARCHAR(100)   PRIMARY KEY,
 	pseudo		VARCHAR(25),
 	title		VARCHAR(40)
 )engine=innodb;

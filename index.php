@@ -11,9 +11,6 @@
         <a href="post.php"><button>Add an Article</button></a>
     </header>
     <section>
-        <?php
-            //if();
-        ?>
         <article>
             <form method="post">
                 <legend>Triez par :</legend>
@@ -21,27 +18,27 @@
                 <input type="submit" name="dislikes" value="Dislikes">
                 <input type="submit" name="chrono" value="Ordre chronologique">
                 <input type="submit" name="nochrono" value="Ordre anti-chronologique">
-                <input type="submit" name="category" value="Catégories">
+                <!-- <input type="submit" name="category" value="Catégories"> -->
             </form>
             <?php
                 $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article;';
-                if($_POST['likes'])
+                if(isset($_POST['likes']))
                 {
                     $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY likes DESC;';
                 }
-                if($_POST['dislikes'])
+                if(isset($_POST['dislikes']))
                 {
                     $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY dislikes DESC;';
                 }
-                if($_POST['chrono'])
+                if(isset($_POST['chrono']))
                 {
                     $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY postdate;';
                 }
-                if($_POST['nochrono'])
+                if(isset($_POST['nochrono']))
                 {
                     $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo FROM article ORDER BY postdate DESC;';
                 }
-                if($_POST['category'])
+                if(isset($_POST['category']))
                 {
                     $qcontent='SELECT article.title AS atitle,article.content AS acontent,likes,dislikes,article.pseudo AS apseudo,name FROM article,article_category WHERE article.title=article_category.title GROUP BY name,article_title;';
                 }
@@ -96,28 +93,28 @@
                     <input id="like" type="submit" name="like'.$raw['atitle'].'" value="Like">
                     <input id="dislike" type="submit" name="dislike'.$raw['atitle'].'" value="Dislike">
                     </form>';
-                    if($_POST['like'.$raw['atitle']])
+                    if(isset($_POST['like'.$raw['atitle']]))
                     {
                         mysqli_query($db,'UPDATE article SET likes=likes+1 WHERE article.title = \''.$raw['atitle'].'\';');
                     }
-                    if($_POST['dislike'.$raw['atitle']])
+                    if(isset($_POST['dislike'.$raw['atitle']]))
                     {
                         mysqli_query($db,'UPDATE article SET dislikes=dislikes+1 WHERE article.title = \''.$raw['atitle'].'\';');
                     }
-                    $q4 = mysqli_query($db,'SELECT name,content,pseudo FROM comment WHERE comment.title=\''.$raw['atitle'].'\';');
+                    $q4 = mysqli_query($db,'SELECT content,pseudo FROM comment WHERE comment.title=\''.$raw['atitle'].'\';');
                     while ($raw4 = mysqli_fetch_array($q4)) 
                     {
                         echo '
                         <div id="comment">
-                            <h2 id="comment">"'.$raw4['name'].'"@'.$raw4['pseudo'].'</h2>
+                            <h2 id="comment">@'.$raw4['pseudo'].'</h2>
                             <p id="comment">'.$raw4['content'].'</p>
                         </div>';   
                     }
                     echo'
-                    <form method="POST" action="button">
-                        <textarea name="comentaire" id="comment" placeholder="Enter a comment (100 characters max)"></textarea>
+                    <form method="POST" action="index.php">
+                        <textarea name="comment" id="comment" placeholder="Enter a comment (100 characters max)"></textarea>
                         <br/><p id="form">Choose</p>
-                        <input list="authors" name="authors">
+                        <input list="authors" name="existant_author">
                         <datalist id="authors">
                         ';
                                 $q5 = mysqli_query($db,"select pseudo from user;");
@@ -128,12 +125,43 @@
                         echo '
                         </datalist>
                         <p id="form">or create</p>
-                        <textarea id="author" placeholder="an author"></textarea>
+                        <textarea id="author" placeholder="an author" name="new_author"></textarea>
+                        <input type="hidden" name="title" value="'.$raw['title'].'">
                         <button id="send" type="submit">Comment</button>
-                    </form>      
-                </article> ';
+                    </form>
+                    ';
+                    if( isset($_POST['new_author']) && isset($_POST['existant_author']) )
+                    {
+                        echo("You can only Choose/create 1 author");
+                    }
+                    if( !isset($_POST['new_author']) && isset($_POST['existant_author']) )
+                    {
+                        echo("Select / Create a least 1 user");
+                    }
+                    $test=0;
+                    $q6 = mysqli_query($db,"select pseudo from user;");
+                    while ( $raw6=mysqli_fetch_array($q6) )
+                    {
+                        if($raw6['pseudo'] == $_POST['new_author'])
+                        {
+                            echo("You can't create an existant user");
+                        }
+                    }
+                    if($_POST['new_author'] != "")
+                    {
+                        mysqli_query($db,'insert into user values("'.$_POST['new_author'].'")');
+                        mysqli_query($db,'insert into comment values("'.$_POST['comment'].'","'.$_POST['new_author'].'",'.$_POST['title'].');');
+                        echo "Nouvel utilisteur + article ok";
+                    }
+                    if($_POST['existant_author'] != "")
+                    {
+                        mysqli_query($db,'insert into comment values("'.$_POST['comment'].'","'.$_POST['existant_author'].'",'.$_POST['title'].');');
+                        echo " nouveau commentaire ok<br />";
+                    }
+                echo '</article> ';
             }
         ?>
+        <!--
         <article>
             <h2>Title@author</h2>
             <h3>Category1</h3>
@@ -169,6 +197,7 @@
                 <button id="send">Comment</button>
             </form>      
         </article>
+        -->
     </section>
 </body>
 </html>
